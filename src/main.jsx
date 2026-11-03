@@ -7,5 +7,6 @@ import '@fontsource/poppins/latin-700.css';
 import App from './App.jsx';
 import './styles.css';
 import './smartphone.css';
+import './product-preview.css';
 
 createRoot(document.getElementById('root')).render(<React.StrictMode><App /></React.StrictMode>);

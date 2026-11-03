@@ -25,6 +25,7 @@ npm run preview
 - `src/components/Brand.jsx`, `Icon.jsx`: shared brand and interface assets.
 - `src/styles.css`: brand system and responsive styles.
 - `src/smartphone.css`: phone-specific layouts up to 767px, readable dashboard, touch targets, and mobile demo form.
+- `src/product-preview.css`: separate mobile app and desktop dashboard previews; CSS switches at 768px without browser detection or a page reload. Both designs share the same illustrative transactions.
 - `public/pulse-symbol.svg`: scalable vector recreation based on the supplied PULSE symbol.
 
 Poppins is bundled locally. The supplied banner is used as the social preview. The original reference files are preserved.
