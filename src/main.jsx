@@ -6,5 +6,6 @@ import '@fontsource/poppins/latin-600.css';
 import '@fontsource/poppins/latin-700.css';
 import App from './App.jsx';
 import './styles.css';
+import './smartphone.css';
 
 createRoot(document.getElementById('root')).render(<React.StrictMode><App /></React.StrictMode>);

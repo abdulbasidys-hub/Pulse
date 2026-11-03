@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Brand from './components/Brand';
 import Icon from './components/Icon';
 import Dashboard from './components/Dashboard';
@@ -6,7 +6,19 @@ import DemoModal from './components/DemoModal';
 
 function Navigation({ onDemo }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  return <header className="site-header"><div className="container nav-shell"><a href="#" className="brand-link" aria-label="PULSE home"><Brand/></a><nav className={menuOpen ? 'nav-links is-open' : 'nav-links'} aria-label="Main navigation"><a href="#why-pulse" onClick={() => setMenuOpen(false)}>Why Pulse</a><a href="#features" onClick={() => setMenuOpen(false)}>Features</a><a href="#how-it-works" onClick={() => setMenuOpen(false)}>How it works</a><button className="mobile-cta" onClick={() => { setMenuOpen(false); onDemo(); }}>Explore the demo <Icon name="arrow" size={16}/></button></nav><button className="button button-lime nav-cta" onClick={onDemo}>Get started <Icon name="diagonal" size={16}/></button><button className="menu-button icon-button" aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><Icon name={menuOpen ? 'close' : 'menu'} size={24}/></button></div></header>;
+  const menuButton = useRef(null);
+  useEffect(() => {
+    if (!menuOpen) return;
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false);
+        menuButton.current?.focus();
+      }
+    };
+    document.addEventListener('keydown', closeOnEscape);
+    return () => document.removeEventListener('keydown', closeOnEscape);
+  }, [menuOpen]);
+  return <header className="site-header"><div className="container nav-shell"><a href="#" className="brand-link" aria-label="PULSE home"><Brand showPeriod={false}/></a><nav id="main-navigation" className={menuOpen ? 'nav-links is-open' : 'nav-links'} aria-label="Main navigation"><a href="#why-pulse" onClick={() => setMenuOpen(false)}>Why Pulse</a><a href="#features" onClick={() => setMenuOpen(false)}>Features</a><a href="#how-it-works" onClick={() => setMenuOpen(false)}>How it works</a><button className="mobile-cta" onClick={() => { setMenuOpen(false); onDemo(); }}>Explore the demo <Icon name="arrow" size={16}/></button></nav><button className="button button-lime nav-cta" onClick={onDemo}>Get started <Icon name="diagonal" size={16}/></button><button ref={menuButton} className="menu-button icon-button" aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}><Icon name={menuOpen ? 'close' : 'menu'} size={24}/></button></div></header>;
 }
 
 function Hero({ onDemo }) {
