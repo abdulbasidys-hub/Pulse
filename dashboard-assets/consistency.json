@@ -1,0 +1,28 @@
+{
+  "sourceHashes": {
+    "scripts/export-dashboard-assets.cjs": "d8819a362697dc227356db4b6e21aa8514dd994dd9695b2f0561ee7d3bf7ff97",
+    "src/data/product-demo.json": "dc12b81d0ceb6875aff55a7865265b705632b8ba93b1aea1d70f85b027ab3286",
+    "public/pulse-symbol.svg": "8923a3d98880c4fbe3a7dc01731d1e236ce675fb8179374b1ffb9decb5d9f588"
+  },
+  "fileHashes": {
+    "public/product/desktop-dashboard.svg": "4092796fb9723fe3f000f2a663a13b2190b0d636bc6ea2389ce66f8bc7ab7047",
+    "public/product/mobile-dashboard.svg": "35243f25f21c4169f89c81d8d26ba5297f58bb73060b72154ef3a9fbbbf2f725",
+    "public/social-preview.png": "f86519fb0665139a74c38a4054a1427eb69ff562782bf423e1d475bc484adaac",
+    "brand-assets/pulse-banner-1500x500.svg": "cff268d87969194196736d889416ceaa60f89aacc51bd4c9c92185b1f93ef1e5",
+    "brand-assets/pulse-banner-1500x500.png": "f86519fb0665139a74c38a4054a1427eb69ff562782bf423e1d475bc484adaac",
+    "brand-assets/pulse-logo-alone.svg": "b257ec2e68da8514d3f6c86757edac3a9057eddfa85dd9087c85dd0fcc0939d7",
+    "brand-assets/pulse-logo-alone.png": "122937a66927cf89f172319309598cd00eb8158868252398e8d425857e1a22fc",
+    "dashboard-assets/pulse-desktop-dashboard-transparent.svg": "7dbc146b4b04a08b3aa31a3a3c1f2145dab92111b939213892bbd0f05b09cc87",
+    "dashboard-assets/pulse-desktop-dashboard-transparent.png": "740ce2b96d5bbba65c4fff1ac111cab0c14dcf1bfe4c4df8a7b8c8236bbf1015",
+    "dashboard-assets/pulse-mobile-dashboard-transparent.svg": "b11eb0a309a847d96fe64957240ed9c1c45a74af7acd0d5e95a53694565affdc",
+    "dashboard-assets/pulse-mobile-dashboard-transparent.png": "e8d24dc20bbe03478a3e3d52d513593b3f36a832feecd8f19295bb7e948ed92e",
+    "dashboard-assets/pulse-desktop-dashboard-post.svg": "4700284fee3c0cb6420d6d179653753e6f3a5be20984a1133b5fcf5e6850a7ff",
+    "dashboard-assets/pulse-desktop-dashboard-post.png": "488289fc7dc41b1ddc5d87635ed721324d8d9c1d47e35365ea5e780518c5466a",
+    "dashboard-assets/pulse-mobile-dashboard-post.svg": "c0e159f67140ce39070316a42d918dfea9e36e0d6fb01dedc208c5310a5b94a2",
+    "dashboard-assets/pulse-mobile-dashboard-post.png": "c005390dc3052e5f526f7df3fccc6d8e04a46c827827d4f5c12d17d1ba8990bf"
+  },
+  "artworkHashes": {
+    "desktop": "d8984646056f52a8297fd691125a34f5332121bfb9dc0e72dca07762561a84c0",
+    "mobile": "82f966e6ddee6bbbfc47ceaba338dcbee5148e31d3881d8cca876228c3589d61"
+  }
+}

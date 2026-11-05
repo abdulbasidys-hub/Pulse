@@ -1,0 +1,25 @@
+{
+  "currency": "USDC",
+  "totalWhole": "8,450",
+  "totalDecimals": ".00",
+  "incoming": "850.00",
+  "activeLinks": "03",
+  "profile": { "name": "Jamie Davis", "initials": "JD" },
+  "transactions": [
+    { "initials": "OS", "name": "Orbit Studio", "note": "Brand identity", "amount": "1,250.00", "status": "Received", "color": "lavender" },
+    { "initials": "AC", "name": "Alex Chen", "note": "Website design", "amount": "850.00", "status": "Pending", "color": "peach" },
+    { "initials": "NC", "name": "Nova Creative", "note": "Design retainer", "amount": "2,400.00", "status": "Received", "color": "mint" }
+  ],
+  "views": {
+    "desktop": {
+      "width": 1000, "height": 740,
+      "asset": "/product/desktop-dashboard.svg",
+      "requestButton": { "x": 763, "y": 687, "width": 195, "height": 34 }
+    },
+    "mobile": {
+      "width": 360, "height": 760,
+      "asset": "/product/mobile-dashboard.svg",
+      "requestButton": { "x": 26, "y": 312, "width": 308, "height": 46 }
+    }
+  }
+}

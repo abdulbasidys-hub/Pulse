@@ -28,7 +28,7 @@ npm run preview
 - `src/product-preview.css`: separate mobile app and desktop dashboard previews; CSS switches at 768px without browser detection or a page reload. Both designs share the same illustrative transactions.
 - `public/pulse-symbol.svg`: scalable vector recreation based on the supplied PULSE symbol.
 
-Poppins is bundled locally. The supplied banner is used as the social preview. The original reference files are preserved.
+Poppins is bundled locally. The social preview uses the current project banner built from the canonical product artwork. The original reference files are preserved.
 
 ## Scope
 
@@ -39,6 +39,10 @@ PULSE is fictional. All sample names, amounts, statuses, links, and payment acti
 The downloadable artwork is in [`brand-assets/`](brand-assets/README.md): an exact 1500 × 500 project banner, an enhanced original logo, transparent website wordmarks, symbols, avatars, and outlined SVG masters. The website UI and original supplied reference files are preserved.
 
 Separate desktop/mobile dashboard posting images and transparent cutouts are in [`dashboard-assets/`](dashboard-assets/README.md), with editable SVG masters and a repeatable vector export script.
+
+The website, banner, social preview and posting images share the exact SVG masters in `public/product/`. Demo data and CTA coordinates live in `src/data/product-demo.json`. The build runs `npm run check:product` to prevent stale or inconsistent product artwork. To change the product presentation, update the shared data/renderer and regenerate all exports with `scripts/export-dashboard-assets.cjs`; do not edit the individual images.
+
+The standalone logo is [`brand-assets/pulse-logo-alone.png`](brand-assets/pulse-logo-alone.png), a transparent 2048 × 2048 symbol with no wording.
 
 ## Verification
 

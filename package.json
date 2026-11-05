@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "vite build",
+    "build": "npm run check:product && vite build",
+    "check:product": "node scripts/verify-product-consistency.cjs",
     "preview": "vite preview --host 0.0.0.0",
     "lint": "eslint ."
   },

@@ -11,8 +11,10 @@ Separate desktop and mobile dashboard artwork based on the website's product pre
 
 Each PNG has a matching outlined SVG master. Text is rendered from the bundled Poppins fonts, so the SVGs do not require font installation. The font license is included as `Poppins-OFL.txt`.
 
-These are deterministic vector-based artwork exports, not browser screenshots or AI-generated interface recreations. They preserve the website's desktop/mobile layout, logo, typography, palette, labels and illustrative transactions, with spacing adapted for high-resolution posting. The browser capture connection was unavailable. The website itself is unchanged.
+These are deterministic vector exports. The website now embeds the exact same desktop and mobile artwork as these files and the 1500 × 500 banner. Each platform has one canonical design: identical layout, logo, typography, labels, amounts, statuses and transaction order everywhere. Only the surrounding posting canvas and scale differ. They are not AI-generated interface approximations.
 
 All payments and sample people/businesses are illustrative. PULSE is a fictional concept by Nightfall; these images do not represent a live financial service.
 
-To regenerate: install `sharp` and `fontkit` in a separate tools directory, set `PULSE_ASSET_TOOLS` to that absolute directory, and run `node scripts/export-dashboard-assets.cjs` after installing the project dependencies. Transaction rows are read from `src/components/Dashboard.jsx`; the mark and Poppins font files also come directly from this project.
+To regenerate: install `sharp` and `fontkit` in a separate tools directory, set `PULSE_ASSET_TOOLS` to that absolute directory, and run `node scripts/export-dashboard-assets.cjs` after installing the project dependencies. This updates the website SVGs, every posting image, the banner/social preview, the standalone logo, and `consistency.json` together. Data and CTA coordinates live in `src/data/product-demo.json`; the mark and Poppins font files also come directly from this project.
+
+Run `npm run check:product` to verify matching source/file hashes and exact reuse of both canonical SVG drawings inside every SVG composition. The build runs this check automatically and fails if artwork has become stale.

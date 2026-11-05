@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import Icon from './Icon';
 import Brand from './Brand';
+import product from '../data/product-demo.json';
 
 export default function DemoModal({ open, onClose }) {
   const dialog = useRef(null);
   const [created, setCreated] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [amount, setAmount] = useState('1250');
-  const [purpose, setPurpose] = useState('Brand identity');
+  const [amount, setAmount] = useState(product.transactions[0].amount.replaceAll(',', ''));
+  const [purpose, setPurpose] = useState(product.transactions[0].note);
   useEffect(() => {
     if (open && !dialog.current.open) dialog.current.showModal();
     if (!open && dialog.current.open) dialog.current.close();

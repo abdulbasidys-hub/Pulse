@@ -2,7 +2,11 @@
 
 ## Banner
 
-- `pulse-banner-1500x500.png` — exactly **1500 × 500 px**, opaque navy background, project tagline and illustrative desktop/mobile product previews.
+- `pulse-banner-1500x500.png` — exactly **1500 × 500 px**, opaque navy background, project tagline and the exact desktop/mobile artwork embedded by the website and posting exports. A matching outlined SVG is included.
+
+## Single logo image
+
+- **`pulse-logo-alone.png`** — **2048 × 2048 px**, the Pulse symbol alone, electric lime, genuine transparent background. No text, tagline, dashboard or frame. The matching SVG is included.
 
 ## Enhanced original logo
 
@@ -25,6 +29,8 @@ Each website export also includes a matching `.svg` master. Wordmark lettering i
 
 ## Production notes
 
-The banner and original logo restoration used the built-in image generation tool. Final prompts are recorded in [`prompts.md`](prompts.md). The banner was resampled to 1500 × 500 without cropping; all headline text and both mockups remain within the canvas. Sample payment data is illustrative; PULSE is a fictional concept by Nightfall.
+The current banner is generated directly from the canonical product artwork by `scripts/export-dashboard-assets.cjs`. Its dashboard drawings are identical to `public/product/desktop-dashboard.svg` and `public/product/mobile-dashboard.svg`, not AI approximations. `public/social-preview.png` is the same banner. The original-logo restoration used the built-in image generation tool; historical prompts are recorded in [`prompts.md`](prompts.md). Sample payment data is illustrative; PULSE is a fictional concept by Nightfall.
+
+Run `npm run check:product` to verify that the site, banner, social preview and all posting files remain consistent. Do not edit exported dashboard images individually; update the shared data or renderer and regenerate them together.
 
 `scripts/export-brand-assets.cjs` regenerates the six website PNGs and SVG masters. It uses `sharp` and `fontkit` as optional artwork tools, not website dependencies. Install them in a separate tools directory with `npm install --prefix <tools-directory> sharp fontkit`, set the `PULSE_ASSET_TOOLS` environment variable to that absolute directory, then run `node scripts/export-brand-assets.cjs` from the repository after `npm install`.

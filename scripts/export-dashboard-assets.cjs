@@ -4,16 +4,18 @@
  */
 const fs = require('node:fs/promises');
 const path = require('node:path');
+const crypto = require('node:crypto');
 const { createRequire } = require('node:module');
 const assetRequire = process.env.PULSE_ASSET_TOOLS
   ? createRequire(path.join(process.env.PULSE_ASSET_TOOLS, 'package.json')) : require;
 const sharp = assetRequire('sharp');
 const fontkit = assetRequire('fontkit');
+const product = require('../src/data/product-demo.json');
 
 const C = { navy: '#0A0F2D', lime: '#B6FF00', blue: '#3B5BFF', ink: '#111936', muted: '#727D96', line: '#E6EAF2', pale: '#F8F9FD' };
 const fonts = {};
 let symbol;
-let rows;
+const rows = product.transactions;
 const esc = value => String(value).replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;');
 const rect = (x, y, w, h, r, fill, stroke = '') => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" fill="${fill}"${stroke ? ` stroke="${stroke}"` : ''}/>`;
 const line = (x1, y1, x2, y2, color = C.line) => `<path d="M${x1} ${y1}H${x2}" stroke="${color}"${y1 !== y2 ? ` transform="rotate(${Math.atan2(y2-y1,x2-x1)*180/Math.PI} ${x1} ${y1})"` : ''}/>`;
@@ -68,30 +70,30 @@ function desktop() {
     if (!i) svg += rect(17, y, 171, 45, 7, '#1B2737', '#33412E');
     svg += icon(name, 31, y + 13, 19, !i ? C.lime : '#8F98B5') + text(label, 62, y + 29, 13, !i ? C.lime : '#8F98B5', 400);
   });
-  svg += avatar('JD', 25, 672, 32) + text('Jamie Davis', 68, 687, 11, '#CED1DF', 500) + text('Personal workspace', 68, 703, 8, '#939DB6');
+  svg += avatar(product.profile.initials, 25, 672, 32) + text(product.profile.name, 68, 687, 11, '#CED1DF', 500) + text('Personal workspace', 68, 703, 8, '#939DB6');
   svg += line(205, 70, 1000, 70) + text('Workspace', 240, 41, 11, '#939BAD') + text('/', 327, 41, 11, '#B8BBCA') + text('Overview', 348, 41, 11, '#50566D', 500);
-  svg += icon('search', 870, 25, 18) + icon('bell', 912, 25, 18) + avatar('JD', 951, 20, 28);
+  svg += icon('search', 870, 25, 18) + icon('bell', 912, 25, 18) + avatar(product.profile.initials, 951, 20, 28);
   svg += text('Your money, in motion.', 243, 121, 24, C.navy, 600) + text("Here's your payment activity at a glance.", 243, 145, 11, C.muted);
   svg += rect(912, 103, 46, 21, 4, '#EAEefa') + text('DEMO', 935, 117, 8, '#6374A4', 500, 'center');
   svg += rect(243, 172, 715, 145, 12, C.ink) + text('Total received', 270, 203, 12, '#A0A9C3') + icon('wallet', 380, 189, 17, '#A0A9C3');
-  svg += text('8,450', 270, 262, 48, '#FFFFFF', 500) + text('.00', 270 + textWidth('8,450', 48, 500), 262, 36, '#8A94AD', 500) + text('USDC', 493, 258, 13, '#B3BBCF');
+  svg += text(product.totalWhole, 270, 262, 48, '#FFFFFF', 500) + text(product.totalDecimals, 270 + textWidth(product.totalWhole, 48, 500), 262, 36, '#8A94AD', 500) + text(product.currency, 493, 258, 13, '#B3BBCF');
   svg += '<circle cx="274" cy="291" r="3" fill="#B6FF00"/>' + text('All-time demo activity', 285, 295, 9, '#A1A9C1');
   svg += `<g opacity=".12">${mark(820, 190, 110)}</g>`;
   svg += rect(243, 335, 348, 104, 9, '#FFFFFF', C.line) + rect(610, 335, 348, 104, 9, '#FFFFFF', C.line);
-  svg += text('Incoming payments', 263, 361, 11, C.muted) + text('850.00', 263, 395, 26, C.navy, 500) + text('USDC', 366, 393, 10, C.muted);
+  svg += text('Incoming payments', 263, 361, 11, C.muted) + text(product.incoming, 263, 395, 26, C.navy, 500) + text(product.currency, 366, 393, 10, C.muted);
   svg += '<circle cx="266" cy="419" r="3" fill="#DEBA70"/>' + text('1 payment pending', 277, 423, 9, '#AA935E');
-  svg += text('Payment links', 630, 361, 11, C.muted) + text('03', 630, 395, 26, C.navy, 500) + text('active links', 677, 393, 10, C.muted);
+  svg += text('Payment links', 630, 361, 11, C.muted) + text(product.activeLinks, 630, 395, 26, C.navy, 500) + text('active links', 677, 393, 10, C.muted);
   svg += icon('link', 630, 412, 12, '#7386CE') + text('Ready to share', 648, 423, 9, '#7386CE');
   svg += text('Recent activity', 243, 476, 14, C.navy, 600) + text('Illustrative data', 958, 476, 9, C.muted, 400, 'right');
   rows.forEach((t, i) => {
     const y = 496 + i * 57;
     svg += avatar(t.initials, 243, y + 2, 34, t.color) + text(t.name, 293, y + 16, 12, C.navy, 500) + text(t.note, 293, y + 33, 9, C.muted);
-    svg += text(t.amount, 909, y + 15, 12, C.navy, 500, 'right') + text('USDC', 958, y + 15, 9, C.muted, 400, 'right');
+    svg += text(t.amount, 909, y + 15, 12, C.navy, 500, 'right') + text(product.currency, 958, y + 15, 9, C.muted, 400, 'right');
     svg += text(t.status, 958, y + 34, 9, t.status === 'Received' ? '#37866B' : '#9A762D', 400, 'right');
     if (t.status === 'Received') svg += icon('check', 958 - textWidth(t.status, 9) - 13, y + 26, 10, '#37866B');
     svg += line(243, y + 48, 958, y + 48);
   });
-  svg += rect(763, 687, 195, 34, 6, C.lime) + icon('plus', 780, 696, 15, C.navy) + text('Create payment link', 806, 709, 11, C.navy, 500);
+  svg += rect(...Object.values(product.views.desktop.requestButton), 6, C.lime) + icon('plus', 780, 696, 15, C.navy) + text('Create payment link', 806, 709, 11, C.navy, 500);
   return svg + '</g>';
 }
 
@@ -101,17 +103,17 @@ function mobile() {
   svg += rect(8, 8, 344, 744, 28, C.pale) + text('9:41', 30, 32, 10, C.navy, 600) + rect(141, 17, 78, 20, 12, '#0B1028');
   [5, 8, 11].forEach((h, i) => { svg += rect(292 + i * 5, 33 - h, 3, h, 1, C.navy); });
   svg += rect(315, 23, 17, 9, 2, 'none', C.navy) + rect(317, 25, 11, 5, 1, C.navy);
-  svg += logo(26, 77, 17) + rect(138, 62, 40, 18, 4, '#E9EDF9') + text('DEMO', 158, 74, 7, '#5365A0', 500, 'center') + avatar('JD', 305, 55, 29);
+  svg += logo(26, 77, 17) + rect(138, 62, 40, 18, 4, '#E9EDF9') + text('DEMO', 158, 74, 7, '#5365A0', 500, 'center') + avatar(product.profile.initials, 305, 55, 29);
   svg += text('Welcome back, Jamie', 26, 116, 10, '#70788F') + text('Your work. In motion.', 26, 145, 21, C.navy, 600);
   svg += rect(26, 166, 308, 134, 15, C.ink) + text('Total received', 44, 195, 10, '#ADB7CD');
-  svg += text('8,450', 44, 247, 35, '#FFFFFF', 500) + text('.00', 44 + textWidth('8,450', 35, 500), 247, 27, '#929EB8', 500);
-  svg += rect(44, 268, 40, 18, 5, '#1C2A32', '#3B5438') + text('USDC', 64, 280, 8, C.lime, 400, 'center') + text('All-time demo activity', 94, 280, 8, '#A4B0CA');
+  svg += text(product.totalWhole, 44, 247, 35, '#FFFFFF', 500) + text(product.totalDecimals, 44 + textWidth(product.totalWhole, 35, 500), 247, 27, '#929EB8', 500);
+  svg += rect(44, 268, 40, 18, 5, '#1C2A32', '#3B5438') + text(product.currency, 64, 280, 8, C.lime, 400, 'center') + text('All-time demo activity', 94, 280, 8, '#A4B0CA');
   svg += `<g opacity=".09">${mark(240, 185, 100)}</g>`;
-  svg += rect(26, 312, 308, 46, 9, C.lime) + icon('plus', 42, 326, 18, C.navy) + text('Create payment link', 70, 340, 11, C.navy, 500) + icon('arrow', 302, 327, 17, C.navy);
+  svg += rect(...Object.values(product.views.mobile.requestButton), 9, C.lime) + icon('plus', 42, 326, 18, C.navy) + text('Create payment link', 70, 340, 11, C.navy, 500) + icon('arrow', 302, 327, 17, C.navy);
   svg += rect(26, 375, 149, 94, 10, '#FFFFFF', '#E4E8F1') + rect(185, 375, 149, 94, 10, '#FFFFFF', '#E4E8F1');
-  svg += text('Incoming', 36, 397, 9, '#697084') + text('850.00', 36, 428, 18, C.navy, 500) + text('USDC', 111, 427, 7, '#7C859C');
+  svg += text('Incoming', 36, 397, 9, '#697084') + text(product.incoming, 36, 428, 18, C.navy, 500) + text(product.currency, 111, 427, 7, '#7C859C');
   svg += '<circle cx="38" cy="451" r="2" fill="#CFAA56"/>' + text('1 pending payment', 45, 454, 7, '#956D25');
-  svg += text('Payment links', 195, 397, 9, '#697084') + text('03', 195, 428, 18, C.navy, 500) + text('active', 229, 427, 7, '#7C859C');
+  svg += text('Payment links', 195, 397, 9, '#697084') + text(product.activeLinks, 195, 428, 18, C.navy, 500) + text('active', 229, 427, 7, '#7C859C');
   svg += icon('link', 195, 444, 11, '#526CB7') + text('Ready to share', 211, 454, 7, '#526CB7');
   svg += text('Recent activity', 26, 500, 12, C.navy, 500) + text('Demo data', 334, 500, 8, '#727D96', 400, 'right');
   rows.forEach((t, i) => {
@@ -139,11 +141,12 @@ async function main() {
   await fs.mkdir(output, { recursive: true });
   for (const weight of [400, 500, 600, 700]) fonts[weight] = fontkit.openSync(path.join(root, `node_modules/@fontsource/poppins/files/poppins-latin-${weight}-normal.woff`));
   symbol = (await fs.readFile(path.join(root, 'public/pulse-symbol.svg'), 'utf8')).match(/<path\b[^>]+\/>/g).join('');
-  const source = await fs.readFile(path.join(root, 'src/components/Dashboard.jsx'), 'utf8');
-  rows = [...source.matchAll(/initials: '([^']+)', name: '([^']+)', note: '([^']+)', amount: '([^']+)', status: '([^']+)', color: '([^']+)'/g)].map(m => ({ initials: m[1], name: m[2], note: m[3], amount: m[4], status: m[5], color: m[6] }));
-  if (rows.length !== 3) throw new Error('The dashboard transaction data changed; update the exporter.');
-  const desktopArt = desktop();
-  const mobileArt = mobile();
+  const desktopArt = `<g id="pulse-desktop-canonical">${desktop()}</g>`;
+  const mobileArt = `<g id="pulse-mobile-canonical">${mobile()}</g>`;
+  const productOutput = path.join(root, 'public/product');
+  await fs.mkdir(productOutput, { recursive: true });
+  await fs.writeFile(path.join(productOutput, 'desktop-dashboard.svg'), svgDocument(1000, 740, desktopArt, 'PULSE desktop dashboard — illustrative demo data'));
+  await fs.writeFile(path.join(productOutput, 'mobile-dashboard.svg'), svgDocument(360, 760, mobileArt, 'PULSE mobile dashboard — illustrative demo data'));
   const save = async (name, w, h, body, label) => {
     const content = svgDocument(w, h, body, label);
     await fs.writeFile(path.join(output, `${name}.svg`), content);
@@ -155,7 +158,30 @@ async function main() {
   await save('pulse-desktop-dashboard-post', 1920, 1440, desktopPost, 'PULSE desktop dashboard — concept project by Nightfall');
   const mobilePost = rect(0, 0, 1080, 1350, 0, C.navy) + logo(65, 95, 28, '#FFFFFF') + text('MOBILE EXPERIENCE', 1015, 90, 13, '#A1ACC4', 500, 'right') + group(288, 145, 1.4, mobileArt) + text('A concept project by Nightfall', 540, 1275, 15, '#9CA6C0', 400, 'center') + text('Illustrative demo data', 540, 1302, 12, '#9CA6C0', 400, 'center');
   await save('pulse-mobile-dashboard-post', 1080, 1350, mobilePost, 'PULSE mobile dashboard — concept project by Nightfall');
-  console.log('Exported four dashboard PNGs and four outlined SVG masters.');
+  const bannerBody = rect(0, 0, 1500, 500, 0, C.navy) + logo(60, 105, 38, '#FFFFFF')
+    + text('Your work is global.', 60, 224, 39, '#FFFFFF', 600)
+    + text('Your payments should be too.', 60, 278, 37, C.lime, 600)
+    + text('Request, receive, and track global payments.', 60, 328, 17, '#AFB5CA')
+    + text('A concept project by Nightfall.', 60, 454, 12, '#9CA6C0')
+    + group(780, 65, .49, desktopArt) + group(1290, 65, .48, mobileArt);
+  const banner = svgDocument(1500, 500, bannerBody, 'PULSE — Your work is global. Your payments should be too.');
+  await fs.writeFile(path.join(root, 'brand-assets/pulse-banner-1500x500.svg'), banner);
+  await sharp(Buffer.from(banner)).png().toFile(path.join(root, 'brand-assets/pulse-banner-1500x500.png'));
+  await sharp(Buffer.from(banner)).png().toFile(path.join(root, 'public/social-preview.png'));
+  const solo = svgDocument(2048, 2048, group(320, 320, 11, symbol), 'PULSE logo symbol');
+  await fs.writeFile(path.join(root, 'brand-assets/pulse-logo-alone.svg'), solo);
+  await sharp(Buffer.from(solo)).png().toFile(path.join(root, 'brand-assets/pulse-logo-alone.png'));
+  const digest = buffer => crypto.createHash('sha256').update(buffer).digest('hex');
+  const sourceFiles = ['scripts/export-dashboard-assets.cjs', 'src/data/product-demo.json', 'public/pulse-symbol.svg'];
+  const files = ['public/product/desktop-dashboard.svg', 'public/product/mobile-dashboard.svg',
+    'public/social-preview.png', 'brand-assets/pulse-banner-1500x500.svg', 'brand-assets/pulse-banner-1500x500.png',
+    'brand-assets/pulse-logo-alone.svg', 'brand-assets/pulse-logo-alone.png',
+    ...['pulse-desktop-dashboard-transparent', 'pulse-mobile-dashboard-transparent', 'pulse-desktop-dashboard-post', 'pulse-mobile-dashboard-post'].flatMap(name => ['svg', 'png'].map(ext => `dashboard-assets/${name}.${ext}`))];
+  const manifest = { sourceHashes: {}, fileHashes: {}, artworkHashes: { desktop: digest(desktopArt), mobile: digest(mobileArt) } };
+  for (const file of sourceFiles) manifest.sourceHashes[file] = digest((await fs.readFile(path.join(root, file), 'utf8')).replace(/\r\n/g, '\n').replace(/^\uFEFF/, ''));
+  for (const file of files) manifest.fileHashes[file] = digest(await fs.readFile(path.join(root, file)));
+  await fs.writeFile(path.join(output, 'consistency.json'), JSON.stringify(manifest, null, 2) + '\n');
+  console.log('Exported shared website masters, four dashboard PNGs/SVGs, banner, standalone logo and consistency manifest.');
 }
 
 main().catch(error => { console.error(error); process.exitCode = 1; });
