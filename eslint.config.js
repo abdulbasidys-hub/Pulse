@@ -7,6 +7,10 @@ export default [
   { ignores: ['dist/**'] },
   js.configs.recommended,
   {
+    files: ['scripts/**/*.cjs'],
+    languageOptions: { globals: globals.node }
+  },
+  {
     files: ['**/*.{js,jsx}'],
     languageOptions: { ecmaVersion: 'latest', globals: globals.browser, parserOptions: { ecmaFeatures: { jsx: true } } },
     plugins: { 'react-hooks': reactHooks, 'react-refresh': reactRefresh },
