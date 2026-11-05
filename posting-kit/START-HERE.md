@@ -12,6 +12,8 @@ Everything here is the current, consistent version of the project artwork. Use t
 | `04-logo-alone.png` | 2048 × 2048 | Lime symbol alone, transparent; place on a dark background |
 | `05-profile-avatar.png` | 2048 × 2048 | Navy square with lime symbol; ready for a profile image |
 
+The posting banner uses the logo symbol without the PULSE wordmark. Its headline and credit have no full stops; the supporting sentence keeps its full stop because it contains commas. The dashboard artwork remains identical to the other product images.
+
 The desktop and mobile posts have different aspect ratios. Post them separately to preserve their full composition; if combining them in a carousel, check the crop before publishing. All dashboard layouts and demo data match the website and banner.
 
 ## Copy and context

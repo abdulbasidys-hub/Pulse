@@ -3,6 +3,7 @@
 ## Banner
 
 - `pulse-banner-1500x500.png` — exactly **1500 × 500 px**, opaque navy background, project tagline and the exact desktop/mobile artwork embedded by the website and posting exports. A matching outlined SVG is included.
+- `pulse-posting-banner-1500x500.png` — the posting-kit variant, also **1500 × 500 px**, with symbol-only branding and no full stops on the headline or credit. The supporting sentence retains its period because it contains commas. The product artwork is identical to the standard banner. A matching SVG is included.
 
 ## Single logo image
 

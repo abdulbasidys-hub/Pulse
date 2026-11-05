@@ -168,6 +168,16 @@ async function main() {
   await fs.writeFile(path.join(root, 'brand-assets/pulse-banner-1500x500.svg'), banner);
   await sharp(Buffer.from(banner)).png().toFile(path.join(root, 'brand-assets/pulse-banner-1500x500.png'));
   await sharp(Buffer.from(banner)).png().toFile(path.join(root, 'public/social-preview.png'));
+  // Posting-only copy variant; canonical dashboard artwork remains untouched.
+  const postingBannerBody = rect(0, 0, 1500, 500, 0, C.navy) + mark(60, 68, 40)
+    + text('Your work is global', 60, 224, 39, '#FFFFFF', 600)
+    + text('Your payments should be too', 60, 278, 37, C.lime, 600)
+    + text('Request, receive, and track global payments.', 60, 328, 17, '#AFB5CA')
+    + text('A concept project by Nightfall', 60, 454, 12, '#9CA6C0')
+    + group(780, 65, .49, desktopArt) + group(1290, 65, .48, mobileArt);
+  const postingBanner = svgDocument(1500, 500, postingBannerBody, 'Pulse project banner with symbol-only branding');
+  await fs.writeFile(path.join(root, 'brand-assets/pulse-posting-banner-1500x500.svg'), postingBanner);
+  await sharp(Buffer.from(postingBanner)).png().toFile(path.join(root, 'brand-assets/pulse-posting-banner-1500x500.png'));
   const solo = svgDocument(2048, 2048, group(320, 320, 11, symbol), 'PULSE logo symbol');
   await fs.writeFile(path.join(root, 'brand-assets/pulse-logo-alone.svg'), solo);
   await sharp(Buffer.from(solo)).png().toFile(path.join(root, 'brand-assets/pulse-logo-alone.png'));
@@ -176,6 +186,7 @@ async function main() {
   const files = ['public/product/desktop-dashboard.svg', 'public/product/mobile-dashboard.svg',
     'public/social-preview.png', 'brand-assets/pulse-banner-1500x500.svg', 'brand-assets/pulse-banner-1500x500.png',
     'brand-assets/pulse-logo-alone.svg', 'brand-assets/pulse-logo-alone.png',
+    'brand-assets/pulse-posting-banner-1500x500.svg', 'brand-assets/pulse-posting-banner-1500x500.png',
     ...['pulse-desktop-dashboard-transparent', 'pulse-mobile-dashboard-transparent', 'pulse-desktop-dashboard-post', 'pulse-mobile-dashboard-post'].flatMap(name => ['svg', 'png'].map(ext => `dashboard-assets/${name}.${ext}`))];
   const manifest = { sourceHashes: {}, fileHashes: {}, artworkHashes: { desktop: digest(desktopArt), mobile: digest(mobileArt) } };
   for (const file of sourceFiles) manifest.sourceHashes[file] = digest((await fs.readFile(path.join(root, file), 'utf8')).replace(/\r\n/g, '\n').replace(/^\uFEFF/, ''));

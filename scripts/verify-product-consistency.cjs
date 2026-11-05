@@ -30,6 +30,7 @@ try {
       `dashboard-assets/pulse-${variant}-dashboard-transparent.svg`,
       `dashboard-assets/pulse-${variant}-dashboard-post.svg`,
       'brand-assets/pulse-banner-1500x500.svg',
+      'brand-assets/pulse-posting-banner-1500x500.svg',
     ]) assert.ok(text(file).includes(body), `${file} does not embed the identical ${variant} artwork.`);
     const button = view.requestButton;
     assert.ok(button.x >= 0 && button.y >= 0 && button.x + button.width <= view.width && button.y + button.height <= view.height,
@@ -40,6 +41,15 @@ try {
   const banner = read('brand-assets/pulse-banner-1500x500.png');
   assert.equal(banner.readUInt32BE(16), 1500);
   assert.equal(banner.readUInt32BE(20), 500);
+  const postingBanner = text('brand-assets/pulse-posting-banner-1500x500.svg');
+  const postingBranding = postingBanner.slice(0, postingBanner.indexOf('<g id="pulse-desktop-canonical">'));
+  assert.ok(!postingBranding.includes('aria-label="PULSE"'), 'Posting banner must use the symbol without the wordmark.');
+  for (const label of ['Your work is global', 'Your payments should be too', 'A concept project by Nightfall']) {
+    assert.ok(postingBranding.includes(`aria-label="${label}"`), `Incorrect posting banner copy: ${label}`);
+    assert.ok(!postingBranding.includes(`aria-label="${label}."`), `Unexpected full stop: ${label}`);
+  }
+  assert.ok(postingBranding.includes('aria-label="Request, receive, and track global payments."'),
+    'Keep the full stop in the supporting sentence because it contains commas.');
   const solo = read('brand-assets/pulse-logo-alone.png');
   assert.equal(solo.readUInt32BE(16), 2048);
   assert.equal(solo.readUInt32BE(20), 2048);

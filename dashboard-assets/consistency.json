@@ -1,6 +1,6 @@
 {
   "sourceHashes": {
-    "scripts/export-dashboard-assets.cjs": "d8819a362697dc227356db4b6e21aa8514dd994dd9695b2f0561ee7d3bf7ff97",
+    "scripts/export-dashboard-assets.cjs": "a6fec8017cd77458019a2a74892ab8b276e0e7dc17892f98d20b15b0e44410a2",
     "src/data/product-demo.json": "dc12b81d0ceb6875aff55a7865265b705632b8ba93b1aea1d70f85b027ab3286",
     "public/pulse-symbol.svg": "8923a3d98880c4fbe3a7dc01731d1e236ce675fb8179374b1ffb9decb5d9f588"
   },
@@ -12,6 +12,8 @@
     "brand-assets/pulse-banner-1500x500.png": "f86519fb0665139a74c38a4054a1427eb69ff562782bf423e1d475bc484adaac",
     "brand-assets/pulse-logo-alone.svg": "b257ec2e68da8514d3f6c86757edac3a9057eddfa85dd9087c85dd0fcc0939d7",
     "brand-assets/pulse-logo-alone.png": "122937a66927cf89f172319309598cd00eb8158868252398e8d425857e1a22fc",
+    "brand-assets/pulse-posting-banner-1500x500.svg": "5549e8f7516ab68b4a46eb1c0c1dff7f280193b3216974c5636ea6d4957bc067",
+    "brand-assets/pulse-posting-banner-1500x500.png": "508cd85ea85a09a9ebb715d2041f475428f36cd73564f8f78232f8060e54bf7b",
     "dashboard-assets/pulse-desktop-dashboard-transparent.svg": "7dbc146b4b04a08b3aa31a3a3c1f2145dab92111b939213892bbd0f05b09cc87",
     "dashboard-assets/pulse-desktop-dashboard-transparent.png": "740ce2b96d5bbba65c4fff1ac111cab0c14dcf1bfe4c4df8a7b8c8236bbf1015",
     "dashboard-assets/pulse-mobile-dashboard-transparent.svg": "b11eb0a309a847d96fe64957240ed9c1c45a74af7acd0d5e95a53694565affdc",

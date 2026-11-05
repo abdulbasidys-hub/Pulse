@@ -6,12 +6,12 @@ const { execFileSync } = require('node:child_process');
 
 const root = path.resolve(__dirname, '..');
 const files = {
-  'brand-assets/pulse-banner-1500x500.png': 'images/01-pulse-banner.png',
+  'brand-assets/pulse-posting-banner-1500x500.png': 'images/01-pulse-banner.png',
   'dashboard-assets/pulse-desktop-dashboard-post.png': 'images/02-desktop-dashboard.png',
   'dashboard-assets/pulse-mobile-dashboard-post.png': 'images/03-mobile-dashboard.png',
   'brand-assets/pulse-logo-alone.png': 'images/04-logo-alone.png',
   'brand-assets/pulse-avatar-navy.png': 'images/05-profile-avatar.png',
-  'brand-assets/pulse-banner-1500x500.svg': 'editable/pulse-banner.svg',
+  'brand-assets/pulse-posting-banner-1500x500.svg': 'editable/pulse-banner.svg',
   'brand-assets/pulse-logo-alone.svg': 'editable/pulse-logo-alone.svg',
   'dashboard-assets/pulse-desktop-dashboard-post.svg': 'editable/pulse-desktop-post.svg',
   'dashboard-assets/pulse-mobile-dashboard-post.svg': 'editable/pulse-mobile-post.svg',
@@ -30,7 +30,9 @@ async function main() {
     const target = path.join(output, destination);
     await fs.mkdir(path.dirname(target), { recursive: true });
     const data = await fs.readFile(path.join(root, source));
-    await fs.writeFile(target, data);
+    const temporary = `${target}.refresh-${process.pid}`;
+    await fs.writeFile(temporary, data);
+    await fs.rename(temporary, target);
     const copied = await fs.readFile(target);
     if (!data.equals(copied)) throw new Error(`Asset copy mismatch: ${destination}`);
     manifest[destination] = { source, sha256: crypto.createHash('sha256').update(data).digest('hex') };

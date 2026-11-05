@@ -2,7 +2,7 @@
 
 ## 01-pulse-banner.png
 
-PULSE project banner on midnight navy. White and lime text reads “Your work is global. Your payments should be too.” Matching desktop and mobile dashboard previews appear on the right. A note identifies it as a concept project by Nightfall.
+Project banner on midnight navy with the lime Pulse symbol alone at the upper left. White and lime text reads “Your work is global” and “Your payments should be too” without full stops. Matching desktop and mobile dashboard previews appear on the right. A note identifies it as a concept project by Nightfall.
 
 ## 02-desktop-dashboard.png
 

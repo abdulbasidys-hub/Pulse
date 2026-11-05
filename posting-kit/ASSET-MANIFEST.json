@@ -1,7 +1,7 @@
 {
   "images/01-pulse-banner.png": {
-    "source": "brand-assets/pulse-banner-1500x500.png",
-    "sha256": "f86519fb0665139a74c38a4054a1427eb69ff562782bf423e1d475bc484adaac"
+    "source": "brand-assets/pulse-posting-banner-1500x500.png",
+    "sha256": "508cd85ea85a09a9ebb715d2041f475428f36cd73564f8f78232f8060e54bf7b"
   },
   "images/02-desktop-dashboard.png": {
     "source": "dashboard-assets/pulse-desktop-dashboard-post.png",
@@ -20,8 +20,8 @@
     "sha256": "ad2ec70de9d49c0ce2c97e6fe9f65fcd055d30c3692400ec089ca25f2a424aaf"
   },
   "editable/pulse-banner.svg": {
-    "source": "brand-assets/pulse-banner-1500x500.svg",
-    "sha256": "cff268d87969194196736d889416ceaa60f89aacc51bd4c9c92185b1f93ef1e5"
+    "source": "brand-assets/pulse-posting-banner-1500x500.svg",
+    "sha256": "5549e8f7516ab68b4a46eb1c0c1dff7f280193b3216974c5636ea6d4957bc067"
   },
   "editable/pulse-logo-alone.svg": {
     "source": "brand-assets/pulse-logo-alone.svg",
