@@ -36,6 +36,8 @@ PULSE is fictional. All sample names, amounts, statuses, links, and payment acti
 
 ## Brand assets
 
+For posting, start with [`posting-kit/START-HERE.md`](posting-kit/START-HERE.md). That folder contains the current ready-to-post images, standalone logo, captions, alt text, project details, and editable assets. Run `node scripts/prepare-posting-kit.cjs` to refresh its asset copies after regenerating the product artwork.
+
 The downloadable artwork is in [`brand-assets/`](brand-assets/README.md): an exact 1500 × 500 project banner, an enhanced original logo, transparent website wordmarks, symbols, avatars, and outlined SVG masters. The website UI and original supplied reference files are preserved.
 
 Separate desktop/mobile dashboard posting images and transparent cutouts are in [`dashboard-assets/`](dashboard-assets/README.md), with editable SVG masters and a repeatable vector export script.
